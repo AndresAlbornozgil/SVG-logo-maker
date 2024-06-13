@@ -1,0 +1,2 @@
+# SVG-logo-maker
+An SVG-logo-maker that prompts the user to select a color and shape, provide text for the logo, and save the generated SVG to a .svg file.
