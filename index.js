@@ -1,33 +1,72 @@
-// Includes packages needed for this application
-const fs = require("fs");
-const inquirer = require("inquirer");
-const path = require("path");
-const shapes = require("./lib/shapes");
+const inquirer = require('inquirer');
+const fs = require('fs');
+const { Circle, Triangle, Square } = require('./lib/shapes');
 
-// Creates an array of questions for user input
+// Create array of questions to ask
 const questions = [
-    {
-        type: "",
-        name: "",
-        message: ""
-    },
-  ];
+  // Text
+  {
+    type: 'input',
+    name: 'text',
+    message: 'Enter up to three characters',
+    // Set limit of three characters
+  },
 
-// Creates a function to write README file
-function writeToFile(fileName, data) {
-console.info('data:', data);
-return fs.writeFileSync(path.join(process.cwd(),fileName),data);
-}
+  // Text Color
+  {
+    type: 'input',
+    name: 'textColor',
+    message: 'Enter a color of text'
+  },
 
-// Creates a function to initialize app
-function init() { 
+  // Shape
+  {
+    type: 'list',
+    name: 'shape',
+    message: 'Pick a shape',
+    choices: ['triangle', 'circle', 'square']
+  },
+
+  // Shape Color
+  {
+    type: 'input',
+    name: 'shapeColor',
+    message: 'Enter a color of shape'
+  },
+
+];
+
+// Prompt user with questions
 inquirer
-  .prompt(questions)
-  .then(answers => {
-    console.log("Generating")
-    writeToFile("File Name", shapes({...answers})
- ) });
-}
+  .prompt(
+    questions
+  )
+  .then((answers) => {
+    // Make the shape
+    let shape;
 
-// Function call to initialize app
-init();
+    if(answers.shape === 'circle') {
+      shape = new Circle()
+    }
+
+    if(answers.shape === 'square') {
+      shape  = new Square()
+    }
+
+    if(answers.shape === 'triangle') {
+      shape = new Triangle()
+    }
+
+    shape.setColor(answers.shapeColor)
+
+    // Make SVG
+    const svgFile = `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+    ${shape.render()}
+  <text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColor}">${answers.text}</text>
+</svg>`
+
+    
+    // Save SVG to a file
+    console.log(answers, svgFile);
+
+  })
