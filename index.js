@@ -10,6 +10,13 @@ const questions = [
     name: 'text',
     message: 'Enter up to three characters',
     // Set limit of three characters
+    validate: (text) => {
+      if (text.length <= 3) {
+        return true
+      } else {
+        return 'Please enter up to three characters'
+      }
+    }
   },
 
   // Text Color
@@ -67,6 +74,9 @@ inquirer
 
     
     // Save SVG to a file
-    console.log(answers, svgFile);
+    fs.writeFile('SVG-Generator.svg', svgFile, (err) => {
+      if (err) throw err;
+      console.log('The file has been saved!');
+    });
 
   })
