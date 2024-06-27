@@ -1,7 +1,7 @@
 # SVG Logo Maker
 
   ## Description
-  #### An SVG-logo-maker that prompts the user to select a color and shape, provide text for the logo, and save the generated SVG to a .svg file.
+  #### An SVG-logo-maker that prompts the user to select a color and shape, provide text for the logo, and save the generated SVG to a .svg file. I built this project so users would not have to go thorugh the hard work of creating an SVG logo by themselves, but could instead answer a few questions that could generate the shape, color and text of the logo they desired. I learned that it takes a while to write a program or application, but after it's created it can solve problem or multitude of problems in a very fast and efficient manner.
   ## Table of Contents
   - [Installation](#installation)
   - [Usage](#usage)
